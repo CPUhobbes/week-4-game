@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<title>Star Trek RPG</title>
+
+		<meta charset="UTF-8"> 
+
+		 <!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+		<!-- Mobile Tag -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	</head>
+
+
+	<body>
+		<div class="container">
+			<div class="row header text-right">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">STAR TREK RPG</div>
+				<div class="col-md-1"></div>
+			</div>
+
+			<!-- CHARACTER SELECTION -->
+			<div class="row">
+				<div class="col-md-12">
+					Your Character
+				</div>
+			</div>
+			<div class="row" id="clicked">
+				<div class="col-md-2" >
+					<div class="avatarContainer avatarClick" value="0" id="avatarContainer_0">
+						<div class="avatarName" id="avatar_NAME_0">
+						</div>
+						<div class="avatarImage">
+							<img src="assets/images/kirk.jpg" class="imageScaler" alt="Kirk" id="avatar_IMG_0">
+						</div>
+						<div class="avatarHP" id="avatar_HP_0">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="avatarContainer avatarClick" value="1" id="avatarContainer_1">
+						<div class="avatarName" id="avatar_NAME_1">
+						</div>
+						<div class="avatarImage">
+							<img src="assets/images/picard.jpg" class="imageScaler" alt="Picard" id="avatar_IMG_1">
+						</div>
+						<div class="avatarHP" id="avatar_HP_1">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="avatarContainer avatarClick" value="2" id="avatarContainer_2">
+						<div class="avatarName" id="avatar_NAME_2">
+						</div>
+						<div class="avatarImage">
+							<img src="assets/images/sisko.jpg" class="imageScaler" alt="Sisko" id="avatar_IMG_2">
+						</div>
+						<div class="avatarHP" id="avatar_HP_2">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="avatarContainer avatarClick" value="3" id="avatarContainer_3">
+						<div class="avatarName" id="avatar_NAME_3">
+						</div>
+						<div class="avatarImage">
+							<img src="assets/images/janeway.jpg" class="imageScaler" alt="Janeway" id="avatar_IMG_3">
+						</div>
+						<div class="avatarHP" id="avatar_HP_3">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4"></div>
+			</div>
+
+
+
+			<!--ENEMY LIST -->
+
+			<div class="row">
+				<div class="col-md-12">
+					Enemies Avaliable To Attack
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<div class="avatarContainer enemyClick" id="enemyContainer_0">
+						<div class="avatarName" id="enemy_NAME_0">
+							
+						</div>
+						<div class="avatarImage" >
+							<img src="" alt="" id="enemy_IMG_0" class="imageScaler">
+						</div>
+						<div class="avatarHP" id="enemy_HP_0">
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="avatarContainer enemyClick" id="enemyContainer_1">
+						<div class="avatarName" id="enemy_NAME_1">
+						</div>
+						<div class="avatarImage">
+							<img src="" alt="" id="enemy_IMG_1" class="imageScaler">
+						</div>
+						<div class="avatarHP" id="enemy_HP_1">
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="avatarContainer enemyClick" id="enemyContainer_2">
+						<div class="avatarName" id="enemy_NAME_2">
+							
+						</div>
+						<div class="avatarImage">
+							<img src="" alt="" id="enemy_IMG_2" class="imageScaler">
+						</div>
+						<div class="avatarHP" id="enemy_HP_2">
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 heightDummy"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					Defender
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="avatarContainer" id="currentEnemyContainer" value="">
+						<div class="avatarName" id="currentEnemy_NAME">
+						</div>
+						<div class="avatarImage">
+							<img src="" alt="" id="currentEnemy_IMG" class="imageScaler">
+						</div>
+						<div class="avatarHP" id="currentEnemy_HP">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9 heightDummy"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8">
+					<div class =" panel panel-default ">
+						<div class = "panel-body textHeight">
+							<div id="playerText">
+							</div>
+							<div id="cpuText">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<button id="attackClick">Attack</button>
+				</div>
+				<div class="col-md-2">
+					<button id="restart">Restart</button>
+				</div>
+			</div>
+				</div>
+				<div class="col-md-8"></div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- JavaScript -->
+		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="assets/javascript/game.js"></script>
+
+	</body>
+
+</html>
