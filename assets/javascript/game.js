@@ -11,14 +11,14 @@ var AVATAR_STATS = {
 			NAME: "James T. Kirk",
 			HP: 1200,
 			ATTACK: 25,
-			DEFENSE: 25,
+			DEFENSE: 50,
 			IMG: "kirk.jpg"
 		},
 
 		1: {
 			NAME: "Jean Luc Picard",
 			HP: 800,
-			ATTACK: 75,
+			ATTACK: 50,
 			DEFENSE: 75,
 			IMG: "picard.jpg"
 		},
@@ -26,7 +26,7 @@ var AVATAR_STATS = {
 		2: {
 			NAME: "Benjamin Sisko",
 			HP: 1000,
-			ATTACK: 100,
+			ATTACK: 50,
 			DEFENSE: 100,
 			IMG: "sisko.jpg"
 		},
@@ -35,7 +35,7 @@ var AVATAR_STATS = {
 			NAME: "Katherine Janeway",
 			HP: 900,
 			ATTACK: 50,
-			DEFENSE: 50,
+			DEFENSE: 75,
 			IMG: "janeway.jpg"
 		}
 };
@@ -78,6 +78,7 @@ function startGame() {
 			$("#avatar_NAME_"+i).html(AVATAR_STATS[i]["NAME"]);
 			$("#avatar_IMG_"+i).attr("src", IMG_DIR+AVATAR_STATS[i]["IMG"]);
 			$("#avatarContainer_"+i).css({"display":"inline-block"});
+			$("#avatarContainer_"+i).attr("value", i);
 		}
 
 }
@@ -201,7 +202,15 @@ function attack(){
 		if(!gameOver){
 			console.log(playerHP, cpuHP);
 
-			if(playerHP <= 0){
+			
+			if (playerHP<= 0 && cpuHP <=0){
+				$("#currentEnemyContainer").css({"display":"none"});
+				canAttack=false;
+				gameOver=true;
+				$("#playerText").html("There was a tie! You and "+cpuName+" have both been defeated");
+				$("#cpuText").html("Press restart to play again!");
+			}
+			else if(playerHP <= 0){
 				$("#currentEnemyContainer").css({"display":"none"});
 				canAttack=false;
 				gameOver=true;
@@ -209,7 +218,7 @@ function attack(){
 				$("#playerText").html("You have been defeated by "+cpuName+" !!");
 				$("#cpuText").html("Press restart to play again!");
 			}
-			else if(cpuHP <= 0 && enemyNum.length<1){
+			else if(cpuHP <= 0 && enemyNum.length<1  && playerHP >0 ){
 				$("#currentEnemyContainer").css({"display":"none"});
 				canAttack=false;
 				gameOver=true;
@@ -224,15 +233,7 @@ function attack(){
 				$("#cpuText").html("Select another enemy to defeat..");
 
 			}
-			else if (playerHP<= 0 && cpuHP <=0){
-				$("#currentEnemyContainer").css({"display":"none"});
-				canAttack=false;
-				gameOver=true;
-				$("#playerText").html("There was a tie! You and "+cpuName+" have both been defeated");
-				$("#cpuText").html("Press restart to play again!");
-
-
-			}
+			
 		}
 
 	}
