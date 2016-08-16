@@ -6,6 +6,7 @@
 //CONSTANTS
 var IMG_DIR = "assets/images/";
 
+//Avatar object
 var AVATAR_STATS = {
 		0: {
 			NAME: "James T. Kirk",
@@ -53,15 +54,21 @@ var currentEnemy;
 
 
 
-
+//Start game and get the values from the button (avatar) clicks
 $(document).ready(function(){
 		startGame();
+
+		//Get avatar selected from click
 		$(".avatarClick").click(function(){
 			selectChar($(this).attr('value'));
 		});
+
+		//Get enemy selected from click
 		$(".enemyClick").click(function(){
 			selectEnemy($(this).attr('value'));
 		});
+
+		//Run game logic for attack clicks
 		$("#attackClick").click(function(){
 			attack();
 		});
@@ -71,8 +78,10 @@ $(document).ready(function(){
 		});
 });
 
+//Start the game
 function startGame() {
-		//Initialize HP for each avatar
+
+		//Initialize all stats for each avatar in the character select area
 		for(var i = 0; i<Object.keys(AVATAR_STATS).length;++i){
 			$("#avatar_HP_"+i).html(AVATAR_STATS[i]["HP"]);
 			$("#avatar_NAME_"+i).html(AVATAR_STATS[i]["NAME"]);
@@ -80,16 +89,24 @@ function startGame() {
 			$("#avatarContainer_"+i).css({"display":"inline-block"});
 			$("#avatarContainer_"+i).attr("value", i);
 		}
-
 }
+
+/*
+ *	After a character is selected move it to the "0" position and copy its stats to those tags
+ *	Make all other characters display :none 
+ *  Move enemies to next position
+ */
 function selectChar(idNum){
 
 	if(gameStart){
+
+		//Clear all characters in character select screen
 		for(var i = 0; i<Object.keys(AVATAR_STATS).length;++i){
 
 			$("#avatarContainer_"+i).css({"display":"none"});
 		}
 
+		//Only show selected character
 		$("#avatar_HP_0").html(AVATAR_STATS[idNum]["HP"]);
 		$("#avatar_NAME_0").html(AVATAR_STATS[idNum]["NAME"]);
 		$("#avatarContainer_0").css({"display":"inline-block"});
@@ -99,10 +116,13 @@ function selectChar(idNum){
 
 		gameStart = false;
 		moveEnemies(idNum);
-
 	}
 }
 
+/*
+ *	Add enemies to an array to keep count of enemies left
+ *	Set enemy tag placeholders to selectable enemies
+ */
 function moveEnemies(idNum){
 
 	var counter = 0;
@@ -119,8 +139,18 @@ function moveEnemies(idNum){
 		}
 	}
 }
+
+
+/*
+ *	From enemy list move the enemy to the battle area
+ *	Remove selected enemy from the select enemy area and move existing ones over
+ *	Setup conditions that allow enemy to be attacked in battle area
+ */
 function selectEnemy(idNum){
+
 	if(newEnemy){
+
+		//Move enemy to battle area
 		$("#currentEnemy_NAME").html(AVATAR_STATS[idNum]["NAME"]);
 		$("#currentEnemy_IMG").attr("src", IMG_DIR+AVATAR_STATS[idNum]["IMG"]);
 		$("#currentEnemy_IMG").attr("alt", AVATAR_STATS[idNum]["NAME"]);
@@ -131,13 +161,18 @@ function selectEnemy(idNum){
 		currentEnemy = idNum;
 		canAttack = true;
 		
+		//Clear possible enemy tags/containers
 		for(var i = 0; i<enemyNum.length;++i){
 			$("#enemyContainer_"+i).css({"display":"none"});
 		}
+
+		//Remove enemy from possible enemy list
 		var elementRemove = enemyNum.indexOf(parseInt(idNum));
 		if (elementRemove> -1){
 	    	enemyNum.splice(elementRemove, 1);
 		}
+
+		//Show/Move enemies not selected 
 		for(var i = 0; i<enemyNum.length;++i){
 			$("#enemyContainer_"+i).css({"display":"inline-block"});
 			$("#enemy_NAME_"+i).html(AVATAR_STATS[enemyNum[i]]["NAME"]);
@@ -153,6 +188,10 @@ function selectEnemy(idNum){
 	}
 
 }
+
+/*
+ *	Restart game, reset all variables
+ */
 function restart(){
 	startGame();
 	gameStart = true;
@@ -172,37 +211,44 @@ function restart(){
 
 }
 
+/*
+ *	Get all stats for the player and the "computer"
+ *	Peform simple math for each attack and display result
+ *	Check for win/lose/draw conditions or else allow another enemy be selected
+ */
 function attack(){
 	if(canAttack){
 		
 		newEnemy=true;
 
+		//Player stats
 		var playerHP = parseInt($("#avatar_HP_0").html());
 		var playerName = $("#avatar_NAME_0").html();
 		var playerNum = $("#avatarContainer_0").attr('value');
 		var playerAttack = AVATAR_STATS[playerNum]["ATTACK"];
 		var totalPlayerAttack = playerAttack+playerPower;
 
-
+		//CPU stats
 		var cpuName = $("#currentEnemy_NAME").html();
 		var cpuHP = parseInt($("#currentEnemy_HP").html());
 		var cpuNum = $("#currentEnemyContainer").attr('value');
 		var cpuAttack = AVATAR_STATS[cpuNum]["DEFENSE"];
 
+		//Game logic/math
 		cpuHP -= totalPlayerAttack;
 		playerHP -= cpuAttack;
-
 		$("#currentEnemy_HP").html(cpuHP);
 		$("#avatar_HP_0").html(playerHP);
 		playerPower+=playerAttack;
 
+		//Message box results
 		$("#playerText").html("You  hit "+cpuName+" for "+totalPlayerAttack+" damage!");
 		$("#cpuText").html(cpuName+" hit you for "+cpuAttack+" damage!");
 
 		if(!gameOver){
 			console.log(playerHP, cpuHP);
 
-			
+			//Tie condition
 			if (playerHP<= 0 && cpuHP <=0){
 				$("#currentEnemyContainer").css({"display":"none"});
 				canAttack=false;
@@ -210,6 +256,8 @@ function attack(){
 				$("#playerText").html("There was a tie! You and "+cpuName+" have both been defeated");
 				$("#cpuText").html("Press restart to play again!");
 			}
+
+			//Lose condition
 			else if(playerHP <= 0){
 				$("#currentEnemyContainer").css({"display":"none"});
 				canAttack=false;
@@ -218,6 +266,8 @@ function attack(){
 				$("#playerText").html("You have been defeated by "+cpuName+" !!");
 				$("#cpuText").html("Press restart to play again!");
 			}
+
+			//Win condition
 			else if(cpuHP <= 0 && enemyNum.length<1  && playerHP >0 ){
 				$("#currentEnemyContainer").css({"display":"none"});
 				canAttack=false;
@@ -226,16 +276,15 @@ function attack(){
 				$("#cpuText").html("Press restart to play again!");
 
 			}
+
+			//Enemy defeated, select another enemy
 			else if(cpuHP <= 0 && enemyNum.length>0){
 				$("#currentEnemyContainer").css({"display":"none"});
 				canAttack=false;
 				$("#playerText").html("You  have defeated "+cpuName+"!!");
 				$("#cpuText").html("Select another enemy to defeat..");
-
 			}
-			
 		}
-
 	}
 }
 
