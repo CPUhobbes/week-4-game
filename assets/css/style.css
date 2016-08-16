@@ -4,15 +4,11 @@ html {
    
 }
 
-
-
-
-
 body {
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	height:100%;
 	color: red;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: bold;
 	background-image: url("../images/ST_BG.jpg");
 	background-position: center;
@@ -25,15 +21,14 @@ body {
 
 }
 
-
-
 .avatarContainer{
 	display: inline-block;
 	text-align: center;
 	background-color: #ffffff;
 	width: 150px;
-	margin: 10px;
-
+	border-radius: 3px;
+	border: 2px solid #e6e600;
+	margin: 10px 0;
 
 }
 
@@ -50,8 +45,47 @@ body {
 	height:80px;
 }
 
+.enemyClick{
+	display:none;
+	background-color: #aaaaaa;
+}
+
+.enemyHover{
+}
+
+.enemyHover:hover{
+	background-color: #ff5050;
+	color: #ffffff;
+	border-color: #ffffff;
+}
+
+.avatarHover{
+}
+
+.avatarHover:hover{
+	background-color: #66ff66;
+}
+
+.attackClick{
+	display:none;
+	background-color: #ff5050;
+	color: #ffffff;
+	border-color: #ffffff;
+}
+
+
+.dead {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+
 @media(max-width: 991px){
 	.heightDummy{
 		height: 0px;
 
 	}
+}

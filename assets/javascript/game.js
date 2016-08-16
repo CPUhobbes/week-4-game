@@ -11,7 +11,7 @@ var AVATAR_STATS = {
 		0: {
 			NAME: "James T. Kirk",
 			HP: 1200,
-			ATTACK: 25,
+			ATTACK: 30,
 			DEFENSE: 50,
 			IMG: "kirk.jpg"
 		},
@@ -27,8 +27,8 @@ var AVATAR_STATS = {
 		2: {
 			NAME: "Benjamin Sisko",
 			HP: 1000,
-			ATTACK: 50,
-			DEFENSE: 100,
+			ATTACK: 30,
+			DEFENSE: 110,
 			IMG: "sisko.jpg"
 		},
 
@@ -36,7 +36,7 @@ var AVATAR_STATS = {
 			NAME: "Katherine Janeway",
 			HP: 900,
 			ATTACK: 50,
-			DEFENSE: 75,
+			DEFENSE: 80,
 			IMG: "janeway.jpg"
 		}
 };
@@ -88,6 +88,7 @@ function startGame() {
 			$("#avatar_IMG_"+i).attr("src", IMG_DIR+AVATAR_STATS[i]["IMG"]);
 			$("#avatarContainer_"+i).css({"display":"inline-block"});
 			$("#avatarContainer_"+i).attr("value", i);
+			$("#avatarContainer_"+i).addClass("avatarHover");
 		}
 }
 
@@ -104,7 +105,14 @@ function selectChar(idNum){
 		for(var i = 0; i<Object.keys(AVATAR_STATS).length;++i){
 
 			$("#avatarContainer_"+i).css({"display":"none"});
+			$("#avatarContainer_"+i).removeClass("avatarHover");
+
 		}
+
+		//Add Hover class back to enemy row
+		for(var i = 0; i<Object.keys(AVATAR_STATS).length-1;++i){
+					$("#enemyContainer_"+i).addClass("enemyHover");
+				}
 
 		//Only show selected character
 		$("#avatar_HP_0").html(AVATAR_STATS[idNum]["HP"]);
@@ -114,8 +122,12 @@ function selectChar(idNum){
 		$("#avatar_IMG_0").attr("alt", AVATAR_STATS[idNum]["NAME"]);
 		$("#avatarContainer_0").attr('value', idNum);
 
+		
+
 		gameStart = false;
 		moveEnemies(idNum);
+
+
 	}
 }
 
@@ -164,6 +176,7 @@ function selectEnemy(idNum){
 		//Clear possible enemy tags/containers
 		for(var i = 0; i<enemyNum.length;++i){
 			$("#enemyContainer_"+i).css({"display":"none"});
+			$("#enemyContainer_"+i).removeClass("enemyHover");
 		}
 
 		//Remove enemy from possible enemy list
@@ -209,6 +222,10 @@ function restart(){
 	$("#playerText").html("");
 	$("#cpuText").html("");
 
+	//return images to normal after deaths in previous game
+	$("#avatar_IMG_0").removeClass("dead");
+	$("#currentEnemy_IMG").removeClass("dead");
+
 }
 
 /*
@@ -219,7 +236,7 @@ function restart(){
 function attack(){
 	if(canAttack){
 		
-		newEnemy=true;
+		
 
 		//Player stats
 		var playerHP = parseInt($("#avatar_HP_0").html());
@@ -250,7 +267,12 @@ function attack(){
 
 			//Tie condition
 			if (playerHP<= 0 && cpuHP <=0){
-				$("#currentEnemyContainer").css({"display":"none"});
+				//$("#currentEnemyContainer").css({"display":"none"});
+				$("#avatar_IMG_0").addClass("dead");
+				$("#avatar_HP_0").html("DEFEATED");
+				$("#currentEnemy_IMG").addClass("dead");
+				$("#currentEnemy_HP").html("DEFEATED");
+
 				canAttack=false;
 				gameOver=true;
 				$("#playerText").html("There was a tie! You and "+cpuName+" have both been defeated");
@@ -259,7 +281,9 @@ function attack(){
 
 			//Lose condition
 			else if(playerHP <= 0){
-				$("#currentEnemyContainer").css({"display":"none"});
+				//$("#currentEnemyContainer").css({"display":"none"});
+				$("#avatar_IMG_0").addClass("dead");
+				$("#avatar_HP_0").html("DEFEATED");
 				canAttack=false;
 				gameOver=true;
 				newEnemy=false;
@@ -269,7 +293,9 @@ function attack(){
 
 			//Win condition
 			else if(cpuHP <= 0 && enemyNum.length<1  && playerHP >0 ){
-				$("#currentEnemyContainer").css({"display":"none"});
+				//$("#currentEnemyContainer").css({"display":"none"});
+				$("#currentEnemy_IMG").addClass("dead");
+				$("#currentEnemy_HP").html("DEFEATED");
 				canAttack=false;
 				gameOver=true;
 				$("#playerText").html("You have defeated all enemies. Congratulations!!");
@@ -279,10 +305,14 @@ function attack(){
 
 			//Enemy defeated, select another enemy
 			else if(cpuHP <= 0 && enemyNum.length>0){
-				$("#currentEnemyContainer").css({"display":"none"});
 				canAttack=false;
+				$("#currentEnemyContainer").css({"display":"none"});
 				$("#playerText").html("You  have defeated "+cpuName+"!!");
 				$("#cpuText").html("Select another enemy to defeat..");
+
+				newEnemy=true;
+				
+
 			}
 		}
 	}
