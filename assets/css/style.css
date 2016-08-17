@@ -25,7 +25,7 @@ body {
 	display: inline-block;
 	text-align: center;
 	background-color: #ffffff;
-	width: 150px;
+	width: 140px;
 	border-radius: 3px;
 	border: 2px solid #e6e600;
 	margin: 10px 0;
@@ -33,16 +33,16 @@ body {
 }
 
 .imageScaler{
-	width: 100px;
-	height: 130px;
+	width: 80px;
+	height: 105px;
 
 }
 .heightDummy{
-	height:200px;
+	height:170px;
 
 }
 .textHeight{
-	height:80px;
+	height:60px;
 }
 
 .enemyClick{
@@ -81,6 +81,38 @@ body {
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+.panel{
+	margin-bottom: 0px;
+	border: 2px solid white;
+	background-color: #33b8ff;
+	color: #111111;
+
+}
+
+.panel-body{
+	padding: 5px 0px 5px 15px;
+	font-size: 16px;
+}
+
+.playerRow{
+	margin-right: 8px;
+}
+.buttonMargin{
+
+	margin-top: 10px;
+}
+
+@media(max-width: 1195px){
+	.playerRow{
+		margin-right: 0px;
+		padding-right: 0px;
+	}
+	.avatarContainer{
+		width: 135px;
+		margin: 10px 0px;
+		font-size: 12px;
+	}
+}
 
 
 @media(max-width: 991px){
@@ -88,4 +120,13 @@ body {
 		height: 0px;
 
 	}
+	.avatarContainer{
+		width: 100%;
+	}
 }
+
+
+
+
+
+

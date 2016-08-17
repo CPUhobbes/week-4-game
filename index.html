@@ -27,12 +27,18 @@
 
 			<!-- CHARACTER SELECTION -->
 			<div class="row">
-				<div class="col-md-12">
-					Your Character
+				<div class="col-md-8">
+					<div class =" panel panel-default ">
+						<div class = "panel-body">
+							Your Character
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
 				</div>
 			</div>
 			<div class="row" id="playerRow">
-				<div class="col-md-2" >
+				<div class="col-md-2 playerRow" >
 					<div class="avatarContainer avatarClick avatarHover" value="0" id="avatarContainer_0">
 						<div class="avatarName" id="avatar_NAME_0">
 						</div>
@@ -43,7 +49,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 playerRow">
 					<div class="avatarContainer avatarClick avatarHover" value="1" id="avatarContainer_1">
 						<div class="avatarName" id="avatar_NAME_1">
 						</div>
@@ -54,7 +60,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 playerRow">
 					<div class="avatarContainer avatarClick avatarHover" value="2" id="avatarContainer_2">
 						<div class="avatarName" id="avatar_NAME_2">
 						</div>
@@ -65,7 +71,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 playerRow">
 					<div class="avatarContainer avatarClick avatarHover" value="3" id="avatarContainer_3">
 						<div class="avatarName" id="avatar_NAME_3">
 						</div>
@@ -85,8 +91,14 @@
 			<!--ENEMY LIST -->
 
 			<div class="row">
-				<div class="col-md-12">
-					Enemies Avaliable To Attack
+				<div class="col-md-8">
+					<div class =" panel panel-default ">
+						<div class = "panel-body">
+							Enemies Avaliable To Attack
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
 				</div>
 			</div>
 			<div class="row">
@@ -132,8 +144,14 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-12">
-					Defending Enemy
+				<div class="col-md-8">
+					<div class =" panel panel-default ">
+						<div class = "panel-body">
+							Defending Enemy
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
 				</div>
 			</div>
 			<div class="row">
@@ -166,16 +184,20 @@
 			</div>
 			<div class="row">
 				<div class="col-md-2">
-					<button id="attackClick">Attack</button>
+					<button id="attackClick" class="btn btn-success btn-lg buttonMargin">Attack</button>
 				</div>
 				<div class="col-md-2">
-					<button id="restart">Restart</button>
+					<button id="restart" class="btn btn-danger btn-lg buttonMargin">Restart</button>
 				</div>
 			</div>
 				</div>
 				<div class="col-md-8"></div>
 			</div>
 		</div>
+		<!-- Background Audio -->		
+ 		<audio id="audioPlayer" autoplay src="assets/audio/dummy.mp3">
+ 			 Your browser does not support the audio element.
+		</audio>
 
 
 

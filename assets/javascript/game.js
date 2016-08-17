@@ -5,6 +5,8 @@
 
 //CONSTANTS
 var IMG_DIR = "assets/images/";
+var AUDIO_DIR = "assets/audio/";
+var AUDIO_LIST = ["kirk.mp3","picard.mp3","sisko.mp3","janeway.mp3"];
 
 //Avatar object
 var AVATAR_STATS = {
@@ -122,8 +124,9 @@ function selectChar(idNum){
 		$("#avatar_IMG_0").attr("alt", AVATAR_STATS[idNum]["NAME"]);
 		$("#avatarContainer_0").attr('value', idNum);
 
+		$("#audioPlayer").attr("src", AUDIO_DIR+AUDIO_LIST[idNum]);
 		
-
+		console.log(AUDIO_DIR+AUDIO_LIST[idNum]);
 		gameStart = false;
 		moveEnemies(idNum);
 
@@ -318,6 +321,10 @@ function attack(){
 	}
 }
 
+function changeAudio(audioFile){
+	$("#audioPlayer").attr("src", AUDIO_DIR+AUDIO_LIST[audioFile]);
+
+}
 
 
 
