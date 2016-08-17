@@ -7,6 +7,7 @@
 var IMG_DIR = "assets/images/";
 var AUDIO_DIR = "assets/audio/";
 var AUDIO_LIST = ["kirk.mp3","picard.mp3","sisko.mp3","janeway.mp3"];
+var AUDIO_WEAPON = ["weapon.mp3", "weapon2.mp3", "weapon3.mp3" ];
 
 //Avatar object
 var AVATAR_STATS = {
@@ -129,7 +130,7 @@ function selectChar(idNum){
 		$("#avatar_IMG_0").attr("alt", AVATAR_STATS[idNum]["NAME"]);
 		$("#avatarContainer_0").attr('value', idNum);
 
-		$("#audioPlayer").attr("src", AUDIO_DIR+AUDIO_LIST[idNum]);
+		changeAudio(AUDIO_LIST[idNum]);
 
 		//Set the HP for the character selected
 		currentPlayerHP = AVATAR_STATS[idNum]["HP"];
@@ -255,6 +256,10 @@ function restart(){
 function attack(){
 	if(canAttack){
 
+		//Weapon Sound
+		var randWeapon = Math.floor(Math.random()*AUDIO_WEAPON.length);
+		changeAudio(AUDIO_WEAPON[randWeapon]);
+
 		//Player stats
 		//var playerHP = parseInt($("#avatar_HP_0").html());
 		var playerName = $("#avatar_NAME_0").html();
@@ -339,7 +344,7 @@ function attack(){
 }
 
 function changeAudio(audioFile){
-	$("#audioPlayer").attr("src", AUDIO_DIR+AUDIO_LIST[audioFile]);
+	$("#audioPlayer").attr("src", AUDIO_DIR+audioFile);
 
 }
 

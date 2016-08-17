@@ -31,6 +31,7 @@ body {
 	margin: 10px 0;
 	padding: 2px 0;
 
+
 }
 
 .imageScaler{
@@ -87,14 +88,14 @@ body {
 	margin-bottom: 0px;
 	border: 2px solid white;
 	background-color: rgba(51, 184, 255, .7);
-	color: #111111;
+	color: #ffffff;
 	border-radius: 0px;
 
 }
 
 .panel-body{
 	padding: 5px 0px 5px 15px;
-	font-size: 16px;
+	font-size: 18px;
 }
 
 .playerRow{
