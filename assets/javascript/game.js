@@ -51,7 +51,11 @@ var playerPower=0;
 
 
 var enemyNum=[];
-var currentEnemy;
+//var currentEnemy;
+var currentPlayerHP;
+var currentEnemyHP;
+var wins=0;
+var losses=0;
 
 
 
@@ -85,13 +89,14 @@ function startGame() {
 
 		//Initialize all stats for each avatar in the character select area
 		for(var i = 0; i<Object.keys(AVATAR_STATS).length;++i){
-			$("#avatar_HP_"+i).html(AVATAR_STATS[i]["HP"]);
+			$("#avatar_HP_"+i).html("HP: "+AVATAR_STATS[i]["HP"]);
 			$("#avatar_NAME_"+i).html(AVATAR_STATS[i]["NAME"]);
 			$("#avatar_IMG_"+i).attr("src", IMG_DIR+AVATAR_STATS[i]["IMG"]);
 			$("#avatarContainer_"+i).css({"display":"inline-block"});
 			$("#avatarContainer_"+i).attr("value", i);
 			$("#avatarContainer_"+i).addClass("avatarHover");
 		}
+
 }
 
 /*
@@ -117,7 +122,7 @@ function selectChar(idNum){
 				}
 
 		//Only show selected character
-		$("#avatar_HP_0").html(AVATAR_STATS[idNum]["HP"]);
+		$("#avatar_HP_0").html("HP: "+AVATAR_STATS[idNum]["HP"]);
 		$("#avatar_NAME_0").html(AVATAR_STATS[idNum]["NAME"]);
 		$("#avatarContainer_0").css({"display":"inline-block"});
 		$("#avatar_IMG_0").attr("src", IMG_DIR+AVATAR_STATS[idNum]["IMG"]);
@@ -125,8 +130,17 @@ function selectChar(idNum){
 		$("#avatarContainer_0").attr('value', idNum);
 
 		$("#audioPlayer").attr("src", AUDIO_DIR+AUDIO_LIST[idNum]);
+
+		//Set the HP for the character selected
+		currentPlayerHP = AVATAR_STATS[idNum]["HP"];
 		
 		gameStart = false;
+
+		//Resets dialog box
+		$("#playerText").css({"text-align":"left"});
+		$("#playerText").html("");
+		$("#cpuText").css({"text-align":"left"});
+		$("#cpuText").html("");
 		moveEnemies(idNum);
 
 
@@ -146,7 +160,7 @@ function moveEnemies(idNum){
 			$("#enemy_NAME_"+counter).html(AVATAR_STATS[i]["NAME"]);
 			$("#enemy_IMG_"+counter).attr("src", IMG_DIR+AVATAR_STATS[i]["IMG"]);
 			$("#enemy_IMG_"+counter).attr("alt", AVATAR_STATS[i]["NAME"]);
-			$("#enemy_HP_"+counter).html(AVATAR_STATS[i]["HP"]);
+			$("#enemy_HP_"+counter).html("HP: "+AVATAR_STATS[i]["HP"]);
 			$("#enemyContainer_"+counter).attr("value", i);
 			$("#enemyContainer_"+counter).css({"display":"inline-block"});
 			counter+=1;
@@ -168,11 +182,14 @@ function selectEnemy(idNum){
 		$("#currentEnemy_NAME").html(AVATAR_STATS[idNum]["NAME"]);
 		$("#currentEnemy_IMG").attr("src", IMG_DIR+AVATAR_STATS[idNum]["IMG"]);
 		$("#currentEnemy_IMG").attr("alt", AVATAR_STATS[idNum]["NAME"]);
-		$("#currentEnemy_HP").html(AVATAR_STATS[idNum]["HP"]);
+		$("#currentEnemy_HP").html("HP: "+AVATAR_STATS[idNum]["HP"]);
 		$("#currentEnemyContainer").css({"display":"inline-block"});
 		$("#currentEnemyContainer").attr("value", idNum);
 
-		currentEnemy = idNum;
+		//Set the HP for the enemy selected
+		currentEnemyHP = AVATAR_STATS[idNum]["HP"];
+
+		//currentEnemy = idNum;
 		canAttack = true;
 		
 		//Clear possible enemy tags/containers
@@ -193,7 +210,7 @@ function selectEnemy(idNum){
 			$("#enemy_NAME_"+i).html(AVATAR_STATS[enemyNum[i]]["NAME"]);
 			$("#enemy_IMG_"+i).attr("src", IMG_DIR+AVATAR_STATS[enemyNum[i]]["IMG"]);
 			$("#enemy_IMG_"+i).attr("alt", AVATAR_STATS[enemyNum[i]]["NAME"]);
-			$("#enemy_HP_"+i).html(AVATAR_STATS[enemyNum[i]]["HP"]);
+			$("#enemy_HP_"+i).html("HP: "+AVATAR_STATS[enemyNum[i]]["HP"]);
 			$("#enemyContainer_"+i).attr("value", enemyNum[i]);
 		}
 		newEnemy=false;
@@ -237,11 +254,9 @@ function restart(){
  */
 function attack(){
 	if(canAttack){
-		
-		
 
 		//Player stats
-		var playerHP = parseInt($("#avatar_HP_0").html());
+		//var playerHP = parseInt($("#avatar_HP_0").html());
 		var playerName = $("#avatar_NAME_0").html();
 		var playerNum = $("#avatarContainer_0").attr('value');
 		var playerAttack = AVATAR_STATS[playerNum]["ATTACK"];
@@ -249,15 +264,15 @@ function attack(){
 
 		//CPU stats
 		var cpuName = $("#currentEnemy_NAME").html();
-		var cpuHP = parseInt($("#currentEnemy_HP").html());
+		//var cpuHP = parseInt($("#currentEnemy_HP").html());
 		var cpuNum = $("#currentEnemyContainer").attr('value');
 		var cpuAttack = AVATAR_STATS[cpuNum]["DEFENSE"];
 
 		//Game logic/math
-		cpuHP -= totalPlayerAttack;
-		playerHP -= cpuAttack;
-		$("#currentEnemy_HP").html(cpuHP);
-		$("#avatar_HP_0").html(playerHP);
+		currentEnemyHP -= totalPlayerAttack;
+		currentPlayerHP -= cpuAttack;
+		$("#currentEnemy_HP").html("HP: "+currentEnemyHP);
+		$("#avatar_HP_0").html("HP: "+currentPlayerHP);
 		playerPower+=playerAttack;
 
 		//Message box results
@@ -267,7 +282,7 @@ function attack(){
 		if(!gameOver){
 
 			//Tie condition
-			if (playerHP<= 0 && cpuHP <=0){
+			if (currentPlayerHP<= 0 && currentEnemyHP <=0){
 				//$("#currentEnemyContainer").css({"display":"none"});
 				$("#avatar_IMG_0").addClass("dead");
 				$("#avatar_HP_0").html("DEFEATED");
@@ -277,11 +292,11 @@ function attack(){
 				canAttack=false;
 				gameOver=true;
 				$("#playerText").html("There was a tie! You and "+cpuName+" have both been defeated");
-				$("#cpuText").html("Press restart to play again!");
+				$("#cpuText").html("Press Start a new game to play again!");
 			}
 
 			//Lose condition
-			else if(playerHP <= 0){
+			else if(currentPlayerHP <= 0){
 				//$("#currentEnemyContainer").css({"display":"none"});
 				$("#avatar_IMG_0").addClass("dead");
 				$("#avatar_HP_0").html("DEFEATED");
@@ -289,23 +304,27 @@ function attack(){
 				gameOver=true;
 				newEnemy=false;
 				$("#playerText").html("You have been defeated by "+cpuName+" !!");
-				$("#cpuText").html("Press restart to play again!");
+				$("#cpuText").html("Press Start a new game to play again!");
+				losses+=1;
+				$("#losses").html(losses);
 			}
 
 			//Win condition
-			else if(cpuHP <= 0 && enemyNum.length<1  && playerHP >0 ){
+			else if(currentEnemyHP <= 0 && enemyNum.length<1  && currentPlayerHP >0 ){
 				//$("#currentEnemyContainer").css({"display":"none"});
 				$("#currentEnemy_IMG").addClass("dead");
 				$("#currentEnemy_HP").html("DEFEATED");
 				canAttack=false;
 				gameOver=true;
 				$("#playerText").html("You have defeated all enemies. Congratulations!!");
-				$("#cpuText").html("Press restart to play again!");
+				$("#cpuText").html("Press Start a new game to play again!");
+				wins+=1;
+				$("#wins").html(wins);
 
 			}
 
 			//Enemy defeated, select another enemy
-			else if(cpuHP <= 0 && enemyNum.length>0){
+			else if(currentEnemyHP <= 0 && enemyNum.length>0){
 				canAttack=false;
 				$("#currentEnemyContainer").css({"display":"none"});
 				$("#playerText").html("You  have defeated "+cpuName+"!!");

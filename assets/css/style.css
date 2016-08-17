@@ -29,6 +29,7 @@ body {
 	/*border-radius: 3px;*/
 	border: 2px solid #e6e600;
 	margin: 10px 0;
+	padding: 2px 0;
 
 }
 
@@ -38,7 +39,7 @@ body {
 
 }
 .heightDummy{
-	height:170px;
+	height:175px;
 
 }
 .textHeight{
@@ -103,10 +104,27 @@ body {
 
 	margin-top: 10px;
 }
-
+.winLossText{
+	min-height: 110px;  
+  	display: flex;
+  	align-items: center;
+}
+.scorePanel{
+	font-size: 26px;
+	padding: 5px 15px;
+	color: #ffffff;
+	text-align: left;
+}
 
 #cpuText{
 	color: #cc0000;
+}
+
+.footer{
+	height: 10px;
+}
+.centerText{
+	text-align: center;
 }
 
 @media(max-width: 1195px){
@@ -129,6 +147,9 @@ body {
 	}
 	.avatarContainer{
 		width: 100%;
+	}
+	.text-right{
+		text-align: left;
 	}
 }
 

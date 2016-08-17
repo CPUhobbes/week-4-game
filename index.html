@@ -20,8 +20,16 @@
 	<body>
 		<div class="container">
 			<div class="row header text-right">
-				<div class="col-md-1"></div>
-				<div class="col-md-10"><img src="assets/images/STlogo.png" class="" width="350" alt="Star Trek" id=""></div>
+				<!-- <div class="col-md-1"></div> -->
+				<div class="col-md-4 winLossText">
+					<div class =" panel panel-default ">
+						<div class = "panel-body scorePanel">
+							<span>Win:&nbsp;</span><span id="wins">0</span><br/>
+							<span>Lose:&nbsp;</span><span id="losses">0</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-7"><img src="assets/images/STlogo.png" class="" width="350" alt="Star Trek" id=""></div>
 				<div class="col-md-1"></div>
 			</div>
 
@@ -83,7 +91,8 @@
 					</div>
 				</div>
 
-				<div class="col-md-4"></div>
+				<div class="col-md-1 heightDummy"></div>
+				<div class="col-md-3"></div>
 			</div>
 
 
@@ -173,9 +182,9 @@
 				<div class="col-md-8">
 					<div class =" panel panel-default ">
 						<div class = "panel-body textHeight">
-							<div id="playerText">
+							<div id="playerText" class="centerText">Click a character to begin!
 							</div>
-							<div id="cpuText">
+							<div id="cpuText" class="centerText">Score resets only on page refresh. Ties do no count as a win/loss.
 							</div>
 						</div>
 					</div>
@@ -186,12 +195,15 @@
 				<div class="col-md-2">
 					<button id="attackClick" class="btn btn-success btn-lg buttonMargin">Attack</button>
 				</div>
-				<div class="col-md-2">
-					<button id="restart" class="btn btn-danger btn-lg buttonMargin">Restart</button>
+				<div class="col-md-6 text-right">
+					<button id="restart" class="btn btn-danger btn-lg buttonMargin ">Start a new game</button>
 				</div>
 			</div>
 				</div>
-				<div class="col-md-8"></div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 footer"></div>
 			</div>
 		</div>
 		<!-- Background Audio -->		
