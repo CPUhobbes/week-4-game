@@ -287,7 +287,7 @@ function attack(){
 		if(!gameOver){
 
 			//Tie condition
-			if (currentPlayerHP<= 0 && currentEnemyHP <=0){
+			if (currentPlayerHP<= 0 && currentEnemyHP <=0  && enemyNum.length<1){
 				//$("#currentEnemyContainer").css({"display":"none"});
 				$("#avatar_IMG_0").addClass("dead");
 				$("#avatar_HP_0").html("DEFEATED");
@@ -305,6 +305,10 @@ function attack(){
 				//$("#currentEnemyContainer").css({"display":"none"});
 				$("#avatar_IMG_0").addClass("dead");
 				$("#avatar_HP_0").html("DEFEATED");
+				if(currentPlayerHP <= 0  &&  currentEnemyHP <= 0){
+					$("#currentEnemy_IMG").addClass("dead");
+					$("#currentEnemy_HP").html("DEFEATED");
+				}
 				canAttack=false;
 				gameOver=true;
 				newEnemy=false;
