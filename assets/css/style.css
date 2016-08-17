@@ -7,7 +7,7 @@ html {
 body {
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	height:100%;
-	color: red;
+	color: #ffffff;
 	font-size: 14px;
 	font-weight: bold;
 	background-image: url("../images/ST_BG.jpg");
@@ -24,7 +24,7 @@ body {
 .avatarContainer{
 	display: inline-block;
 	text-align: center;
-	background-color: #ffffff;
+	background-color: rgba(0, 102, 0, .6);
 	width: 140px;
 	border-radius: 3px;
 	border: 2px solid #e6e600;
@@ -47,7 +47,8 @@ body {
 
 .enemyClick{
 	display:none;
-	background-color: #aaaaaa;
+	background-color: rgba(102, 153, 153, .6);
+
 }
 
 .enemyHover{
@@ -68,7 +69,7 @@ body {
 
 .attackClick{
 	display:none;
-	background-color: #ff5050;
+	background-color: rgba(255, 80, 80, .6);
 	color: #ffffff;
 	border-color: #ffffff;
 }
