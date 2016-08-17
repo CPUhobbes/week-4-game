@@ -12,8 +12,8 @@ var AUDIO_LIST = ["kirk.mp3","picard.mp3","sisko.mp3","janeway.mp3"];
 var AVATAR_STATS = {
 		0: {
 			NAME: "James T. Kirk",
-			HP: 1200,
-			ATTACK: 30,
+			HP: 1100,
+			ATTACK: 40,
 			DEFENSE: 50,
 			IMG: "kirk.jpg"
 		},
@@ -21,7 +21,7 @@ var AVATAR_STATS = {
 		1: {
 			NAME: "Jean Luc Picard",
 			HP: 800,
-			ATTACK: 50,
+			ATTACK: 60,
 			DEFENSE: 75,
 			IMG: "picard.jpg"
 		},
@@ -29,8 +29,8 @@ var AVATAR_STATS = {
 		2: {
 			NAME: "Benjamin Sisko",
 			HP: 1000,
-			ATTACK: 30,
-			DEFENSE: 110,
+			ATTACK: 25,
+			DEFENSE: 120,
 			IMG: "sisko.jpg"
 		},
 
@@ -126,7 +126,6 @@ function selectChar(idNum){
 
 		$("#audioPlayer").attr("src", AUDIO_DIR+AUDIO_LIST[idNum]);
 		
-		console.log(AUDIO_DIR+AUDIO_LIST[idNum]);
 		gameStart = false;
 		moveEnemies(idNum);
 
@@ -266,7 +265,6 @@ function attack(){
 		$("#cpuText").html(cpuName+" hit you for "+cpuAttack+" damage!");
 
 		if(!gameOver){
-			console.log(playerHP, cpuHP);
 
 			//Tie condition
 			if (playerHP<= 0 && cpuHP <=0){
